@@ -1,37 +1,24 @@
 package com.geekyants.auth2.entities;
 
+import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Entity
-@Table(name="users")
 @DynamicInsert(true)
 @DynamicUpdate(true)
-public class User {
+@Table(name="users")
+public @Data class User extends RepresentationModel<User> {
 
-    public Long getId() {
-        return id;
-    }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public enum Role {
+        user,
+        admin,
+        customer
     }
 
     @Id
@@ -39,9 +26,18 @@ public class User {
     @Column
     Long id;
 
-    @Column
-    private String userName;
-
+    @Column(unique = true)
+    private String username;
     @Column
     private String password;
+
+    @Column(columnDefinition = "ENUM('user', 'admin', 'customer')")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    @RestResource(path = "details", rel="details")
+    private Detail detail;
 }
+
