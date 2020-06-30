@@ -9,9 +9,9 @@ import org.springframework.hateoas.RepresentationModel;
 import javax.persistence.*;
 
 @Entity
-@DynamicInsert(true)
-@DynamicUpdate(true)
-@Table(name="users")
+@DynamicInsert
+@DynamicUpdate
+@Table
 public @Data class User extends RepresentationModel<User> {
 
 
@@ -23,7 +23,7 @@ public @Data class User extends RepresentationModel<User> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(unique = true)
     Long id;
 
     @Column(unique = true)
