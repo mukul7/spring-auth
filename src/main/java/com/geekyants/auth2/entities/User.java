@@ -1,8 +1,11 @@
 package com.geekyants.auth2.entities;
 
+import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -11,7 +14,8 @@ import javax.persistence.*;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table
+@TypeDef(typeClass = PostgreSQLEnumType.class, name = "pgsql_enum")
+@Table(name="users")
 public @Data class User extends RepresentationModel<User> {
 
 
@@ -31,13 +35,14 @@ public @Data class User extends RepresentationModel<User> {
     @Column
     private String password;
 
-    @Column(columnDefinition = "ENUM('user', 'admin', 'customer')")
     @Enumerated(EnumType.STRING)
+    @Type(type = "pgsql_enum")
     private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
-    @RestResource(path = "details", rel="details")
+    @RestResource(path = "details", rel = "details")
     private Detail detail;
+
 }
 

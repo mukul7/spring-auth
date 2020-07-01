@@ -51,10 +51,14 @@ public class AuthenticateController {
 
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
-        System.out.println("while generating" + userDetails.toString());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "well";
     }
 
 

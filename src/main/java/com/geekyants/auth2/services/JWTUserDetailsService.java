@@ -20,8 +20,8 @@ public class JWTUserDetailsService implements UserDetailsService {
     UserRepository userRepo;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException{
-        com.geekyants.auth2.entities.User user = userRepo.findByUsername(userName);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+        com.geekyants.auth2.entities.User user = userRepo.findByUsername(username);
         ArrayList roles= new ArrayList<>();
         roles.add(user.getRole());
         return new User(user.getUsername(), user.getPassword(), new ArrayList<>()) {

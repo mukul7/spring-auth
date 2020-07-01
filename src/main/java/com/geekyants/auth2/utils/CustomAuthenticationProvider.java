@@ -43,14 +43,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
         String password = credentials.toString();
         User user = userRepo.findByUsername(name);
-        if(Objects.isNull(user)){
+        if(user==null){
             throw new UsernameNotFoundException("Username not found in database");
         }
 
-        if (passwordEncoder.matches(password,user.getPassword())) {
+        if (!passwordEncoder.matches(password,user.getPassword())) {
             throw new BadCredentialsException("Authentication failed for " + name);
         }
-
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
         return new UsernamePasswordAuthenticationToken(name, user.getPassword(), grantedAuthorities);
