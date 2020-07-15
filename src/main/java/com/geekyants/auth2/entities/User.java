@@ -1,29 +1,23 @@
 package com.geekyants.auth2.entities;
 
-import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@TypeDef(typeClass = PostgreSQLEnumType.class, name = "pgsql_enum")
 @Table(name="users")
 public @Data class User extends RepresentationModel<User> {
-
-
-    public enum Role {
-        user,
-        admin,
-        customer
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,12 +26,24 @@ public @Data class User extends RepresentationModel<User> {
 
     @Column(unique = true)
     private String username;
+
+    @JsonIgnore
     @Column
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Type(type = "pgsql_enum")
-    private Role role;
+
+    public ArrayList<String> getAuthorities() {
+        if(authorities==null)
+            return new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(authorities.split("\\s*,\\s*")));
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = StringUtils.join(authorities, ',');
+    }
+
+    @Column
+    private String authorities;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)

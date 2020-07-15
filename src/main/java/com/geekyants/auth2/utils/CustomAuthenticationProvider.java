@@ -9,16 +9,12 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -50,9 +46,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if (!passwordEncoder.matches(password,user.getPassword())) {
             throw new BadCredentialsException("Authentication failed for " + name);
         }
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
-        return new UsernamePasswordAuthenticationToken(name, user.getPassword(), grantedAuthorities);
+
+        List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
+        user.getAuthorities().stream().forEach(authority -> grantedAuthorities.add(new SimpleGrantedAuthority(authority)));
+        return new UsernamePasswordAuthenticationToken(name, null, grantedAuthorities);
     }
 
     @Override

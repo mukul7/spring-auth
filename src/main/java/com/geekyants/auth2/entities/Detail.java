@@ -1,6 +1,8 @@
 package com.geekyants.auth2.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -22,8 +24,8 @@ public @Data class Detail extends RepresentationModel<Detail> {
     @Column
     private String gender;
 
-//    @OneToOne(mappedBy = "detail")
-//    private User user;
+    @OneToOne(mappedBy = "detail")
+    private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)

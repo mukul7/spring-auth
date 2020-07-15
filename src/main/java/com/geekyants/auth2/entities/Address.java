@@ -15,7 +15,7 @@ import javax.persistence.*;
 public @Data class Address extends RepresentationModel<Address> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(unique = true, updatable = false)
     Long id;
 
     @Column
