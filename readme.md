@@ -5,7 +5,7 @@ The API's strictly follows HAL standards to implement HATEOAS
 
 # Signup!
 
-![alt text](http://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/signup-postman-screenshot.png?raw=true)
+![alt text](https://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/Signup-postman-screenshot.png?raw=true)
 
 You don't need a documentation
 
