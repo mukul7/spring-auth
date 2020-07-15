@@ -1,0 +1,16 @@
+# Authorization Service
+
+This is a restful microservice that uses jwt token for authentication and authorization.
+The API's strictly follows HAL standards to implement HATEOAS
+
+# Signup!
+
+![alt text](http://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/signup-postman-screenshot.png?raw=true)
+
+You don't need a documentation
+
+Normally, the client figures out which endpoint - or state - they need next by reading some API documentation. But HATEOAS says:
+
+What if we didn't write API documentation and instead, every response we send back self-documents what endpoints you might want next via links?
+
+Every time you make a request, It'll include details about what do to next.
