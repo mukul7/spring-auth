@@ -14,3 +14,15 @@ Normally, the client figures out which endpoint - or state - they need next by r
 What if we didn't write API documentation and instead, every response we send back self-documents what endpoints you might want next via links?
 
 Every time you make a request, It'll include details about what do to next.
+
+# Database Structure
+
+![alt text](https://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/database-visualization.png?raw=true)
+
+# Paginated Reponse
+
+![alt text](https://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/pagination-links.png?raw=true)
+
+# Patch Request to add home address to user detail
+
+![alt text](https://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/patch-request.png?raw=true)
