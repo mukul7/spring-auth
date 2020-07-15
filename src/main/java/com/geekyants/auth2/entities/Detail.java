@@ -24,9 +24,6 @@ public @Data class Detail extends RepresentationModel<Detail> {
     @Column
     private String gender;
 
-    @OneToOne(mappedBy = "detail")
-    private User user;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     @RestResource(path = "homeAddress", rel="homeAddress")
