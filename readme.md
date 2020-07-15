@@ -5,9 +5,9 @@ The API's strictly follows HAL standards to implement HATEOAS
 
 # Signup!
 
-![alt text](https://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/Signup-postman-screenshot.png)
+![alt text](https://github.com/mukul7/spring-auth/blob/master/src/main/resources/static/Signup-postman-screenshot.png?raw=true)
 
-You don't need a documentation
+# You don't need a documentation
 
 Normally, the client figures out which endpoint - or state - they need next by reading some API documentation. But HATEOAS says:
 
