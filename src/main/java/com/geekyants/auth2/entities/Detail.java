@@ -7,7 +7,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.hateoas.RepresentationModel;
-
 import javax.persistence.*;
 
 @Entity
