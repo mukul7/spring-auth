@@ -65,7 +65,6 @@ public class SignupController {
         user.setUsername(data.get("username"));
         user.setPassword(passwordEncoder.encode(data.get("password")));
         user.setAuthorities(authorities);
-        userRepo.save(user);
 
         Detail detail = new Detail();
         detail.setGender(data.get("gender"));
@@ -73,6 +72,8 @@ public class SignupController {
         detailRepo.save(detail);
 
         user.setDetail(detail);
+        userRepo.save(user);
+
         return user;
     }
 }

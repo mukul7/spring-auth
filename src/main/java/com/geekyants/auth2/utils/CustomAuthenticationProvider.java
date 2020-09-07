@@ -28,7 +28,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     JWTUserDetailsService userDetailService;
 
-
     @Override
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {

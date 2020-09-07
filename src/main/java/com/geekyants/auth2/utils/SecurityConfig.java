@@ -22,26 +22,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     JWTUserDetailsService userDetailService;
-
     @Autowired
     JWTRequestFilter jwtRequestFilter;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     CustomAuthenticationProvider authProvider;
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailService);
-//        auth.parentAuthenticationManager(authenticationManagerBean());
         auth.authenticationProvider(authProvider);
         auth.jdbcAuthentication();
-//        auth.userRepository(userRepository);
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
